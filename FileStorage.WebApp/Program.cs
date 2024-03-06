@@ -1,3 +1,6 @@
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Storage.Blobs;
 using FileStorage.WebApp.Components;
 using FileStorage.WebApp.Components.Dtos;
 using FileStorage.WebApp.Components.Services;
@@ -6,10 +9,15 @@ using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("KeyVault"));
+var client = new SecretClient(keyVaultEndpoint, new DefaultAzureCredential());
+
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+KeyVaultSecret fileStorageConnection = client.GetSecret("FileStorageConnection");
+KeyVaultSecret containerName = client.GetSecret("ContainerName");
 
+builder.Services.AddSingleton(new BlobContainerClient(fileStorageConnection.Value, containerName.Value));
 builder.Services.AddScoped<IValidator<FileUploadRequest>, FileUploadValidator>();
 builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 

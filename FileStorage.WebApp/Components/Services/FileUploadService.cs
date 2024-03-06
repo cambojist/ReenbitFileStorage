@@ -8,16 +8,13 @@ namespace FileStorage.WebApp.Components.Services;
 public class FileUploadService : IFileUploadService
 {
     private readonly BlobContainerClient _blobContainerClient;
-    private readonly IValidator<FileUploadRequest> _formDataValidator;
-    private readonly ILogger _logger;
+    private readonly IValidator<FileUploadRequest> _fileUploadValidator;
 
     public FileUploadService(BlobContainerClient blobContainerClient,
-        IValidator<FileUploadRequest> formDataValidator,
-        ILogger logger)
+        IValidator<FileUploadRequest> fileUploadValidator)
     {
         _blobContainerClient = blobContainerClient;
-        _formDataValidator = formDataValidator;
-        _logger = logger;
+        _fileUploadValidator = fileUploadValidator;
     }
     public async Task<FileUploadResponse> UploadAsync(FileUploadRequest request)
     {
@@ -34,24 +31,15 @@ public class FileUploadService : IFileUploadService
             {
                 { "Email", request.Email }
             };
-        try
+        await using Stream data = request.File.OpenReadStream();
+        var response = await client.UploadAsync(data, new BlobUploadOptions
         {
-            await using Stream data = request.File.OpenReadStream();
-            var response = await client.UploadAsync(data, new BlobUploadOptions
-            {
-                HttpHeaders = new BlobHttpHeaders { ContentType = "application/octet-stream" },
-                Metadata = metadata
-            });
+            HttpHeaders = new BlobHttpHeaders { ContentType = "application/octet-stream" },
+            Metadata = metadata
+        });
 
-            uploadFileResponse.Url = client.Uri.AbsoluteUri;
-            uploadFileResponse.Success = true;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error occured during writting file to Blob Container");
-            uploadFileResponse.Errors.Add("Internal error");
-            uploadFileResponse.Success = false;
-        }
+        uploadFileResponse.Url = client.Uri.AbsoluteUri;
+        uploadFileResponse.Success = true;
 
         return uploadFileResponse;
 
@@ -59,16 +47,17 @@ public class FileUploadService : IFileUploadService
 
     private async Task<FileUploadResponse> ValidateRequest(FileUploadRequest request, FileUploadResponse response)
     {
-        var result = await _formDataValidator.ValidateAsync(request);
+        var result = await _fileUploadValidator.ValidateAsync(request);
 
         if (!result.IsValid)
         {
-            response.Success = true;
+            response.Success = false;
             foreach (var error in result.Errors)
             {
                 response.Errors.Add($"Property: {error.PropertyName}, Error: {error.ErrorMessage}");
             }
         }
+        response.Success = true;
         return response;
     }
 }

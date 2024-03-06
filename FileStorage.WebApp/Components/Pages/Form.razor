@@ -1,6 +1,6 @@
 ﻿@page "/"
 @rendermode RenderMode.InteractiveServer
-@inject IFileUploadService fileUploadService
+@inject IFileUploadService fileUploadService 
 
 <h3 class="text-center mt-5">Upload File and Input Email</h3>
 
@@ -54,7 +54,6 @@
 
     private async Task HandleValidSubmit()
     {
-        formData = new FormData();
         var response = await fileUploadService.UploadAsync(new FileUploadRequest
             {
                 File = formData.File,
