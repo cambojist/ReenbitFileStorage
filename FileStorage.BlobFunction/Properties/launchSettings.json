@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "FileStorage.BlobFunction": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7093"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 31040,
+      "useSSL": false
+    }
+  }
+}
