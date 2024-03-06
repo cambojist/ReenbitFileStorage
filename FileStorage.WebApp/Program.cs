@@ -1,10 +1,15 @@
 using FileStorage.WebApp.Components;
+using FileStorage.WebApp.Components.Dtos;
+using FileStorage.WebApp.Components.Validators;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddScoped<IValidator<FileUploadRequest>, FileUploadValidator>();
 
 var app = builder.Build();
 
