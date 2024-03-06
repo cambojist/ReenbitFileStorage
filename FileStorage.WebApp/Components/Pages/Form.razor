@@ -1,0 +1,78 @@
+﻿@page "/"
+@rendermode RenderMode.InteractiveServer
+@inject FileUploadService fileUploadService
+
+<h3 class="text-center mt-5">Upload File and Input Email</h3>
+
+<div class="d-flex justify-content-center">
+    <div class="card p-3" style="max-width: 400px; width: 100%;">
+        <EditForm Model="@formData" OnValidSubmit="HandleValidSubmit" FormName="UploadForm">
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="mb-3">
+                <label for="fileInput" class="form-label">Upload File (DOCX):</label>
+                <InputFile id="fileInput" OnChange="@HandleFileSelected" accept=".docx" class="form-control" required />
+                <ValidationMessage For="@(() => formData.File)" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label for="emailInput" class="form-label">Email:</label>
+                <InputText id="emailInput" @bind-Value="@formData.Email" class="form-control" required />
+                <ValidationMessage For="@(() => formData.Email)" class="text-danger" />
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </EditForm>
+
+        @if (Errors.Count > 0)
+        {
+            <div class="alert alert-danger mt-3">
+                @foreach (var error in Errors)
+                {
+                    <p>@error</p>
+                }
+            </div>
+        }
+        else if (successMessage != null)
+        {
+            <div class="alert alert-success mt-3">
+                @successMessage
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private List<string> Errors { get; set; } = [];
+    private string? successMessage;
+
+    private FormData formData = new FormData();
+
+    private async Task HandleValidSubmit()
+    {
+        formData = new FormData();
+        var response = await fileUploadService.UploadAsync(new FileUploadRequest
+            {
+                File = formData.File,
+                Email = formData.Email
+            });
+
+        if (response.Success)
+        {
+            successMessage = "File upload successfully";
+        }
+        else
+        {
+            Errors = response.Errors;
+        }
+    }
+
+    private void HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        formData.File = e.File;
+    }
+}
