@@ -1,5 +1,6 @@
 using FileStorage.WebApp.Components;
 using FileStorage.WebApp.Components.Dtos;
+using FileStorage.WebApp.Components.Services;
 using FileStorage.WebApp.Components.Validators;
 using FluentValidation;
 
@@ -10,6 +11,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddScoped<IValidator<FileUploadRequest>, FileUploadValidator>();
+builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
 var app = builder.Build();
 
