@@ -9,7 +9,8 @@ using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("KeyVault"));
+var keyVaultEndpoint = new Uri(builder.Configuration["KeyVault"]);
+
 var client = new SecretClient(keyVaultEndpoint, new DefaultAzureCredential());
 
 builder.Services.AddRazorComponents()

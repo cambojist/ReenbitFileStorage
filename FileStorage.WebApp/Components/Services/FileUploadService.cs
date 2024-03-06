@@ -1,6 +1,7 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using FileStorage.WebApp.Components.Dtos;
+using FileStorage.WebApp.Components.Helpers;
 using FluentValidation;
 
 namespace FileStorage.WebApp.Components.Services;
@@ -25,9 +26,9 @@ public class FileUploadService : IFileUploadService
         {
             return uploadFileResponse;
         }
-
-        BlobClient client = _blobContainerClient.GetBlobClient(request.File.Name);
-        IDictionary<string, string> metadata = new Dictionary<string, string>
+        var uniqueFileName = FileNameHelper.GetUniqueFileName(request.File);
+        var client = _blobContainerClient.GetBlobClient(uniqueFileName);
+        var metadata = new Dictionary<string, string>
             {
                 { "Email", request.Email }
             };
