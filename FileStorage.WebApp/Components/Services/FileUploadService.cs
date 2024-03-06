@@ -26,12 +26,14 @@ public class FileUploadService : IFileUploadService
         {
             return uploadFileResponse;
         }
+
         var uniqueFileName = FileNameHelper.GetUniqueFileName(request.File);
         var client = _blobContainerClient.GetBlobClient(uniqueFileName);
         var metadata = new Dictionary<string, string>
             {
                 { "Email", request.Email }
             };
+
         await using Stream data = request.File.OpenReadStream();
         var response = await client.UploadAsync(data, new BlobUploadOptions
         {
@@ -39,11 +41,9 @@ public class FileUploadService : IFileUploadService
             Metadata = metadata
         });
 
-        uploadFileResponse.Url = client.Uri.AbsoluteUri;
         uploadFileResponse.Success = true;
 
         return uploadFileResponse;
-
     }
 
     private async Task<FileUploadResponse> ValidateRequest(FileUploadRequest request, FileUploadResponse response)
@@ -58,6 +58,7 @@ public class FileUploadService : IFileUploadService
                 response.Errors.Add($"Property: {error.PropertyName}, Error: {error.ErrorMessage}");
             }
         }
+
         response.Success = true;
         return response;
     }

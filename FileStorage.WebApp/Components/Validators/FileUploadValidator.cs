@@ -7,6 +7,7 @@ namespace FileStorage.WebApp.Components.Validators;
 public class FileUploadValidator : AbstractValidator<FileUploadRequest>
 {
     private const string DOCX_FILE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+
     public FileUploadValidator()
     {
         RuleFor(x => x.File)
