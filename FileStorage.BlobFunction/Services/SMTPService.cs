@@ -28,7 +28,7 @@ public class SMTPService : ISMTPService
         var mailMessage = new MailMessage(_fromEmail, toEmail)
         {
             Subject = "File Storage Service",
-            Body = $@"Here is your link to uploaded file: <a href=""{link}"">Document</a>"
+            Body = $@"Here is your link to uploaded file: {link}"
         };
 
         await client.SendMailAsync(mailMessage);

@@ -1,6 +1,7 @@
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using FileStorage.BlobFunction;
+using FileStorage.BlobFunction.Services;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,6 +21,9 @@ var host = new HostBuilder()
         Environment.SetEnvironmentVariable(EnviromentalConstant.HOST, keyVaultClient.GetSecret(EnviromentalConstant.HOST).Value.Value);
         Environment.SetEnvironmentVariable(EnviromentalConstant.FROM_EMAIL, keyVaultClient.GetSecret(EnviromentalConstant.FROM_EMAIL).Value.Value);
         Environment.SetEnvironmentVariable(EnviromentalConstant.PASSWORD, keyVaultClient.GetSecret(EnviromentalConstant.PASSWORD).Value.Value);
+
+        services.AddScoped<ISMTPService, SMTPService>();
+        services.AddScoped<ISASTokenService, SASTokenService>();
 
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
