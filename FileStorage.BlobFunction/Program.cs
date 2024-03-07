@@ -1,3 +1,6 @@
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using FileStorage.BlobFunction;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -6,6 +9,18 @@ var host = new HostBuilder()
     .ConfigureFunctionsWebApplication()
     .ConfigureServices(services =>
     {
+        var keyVaultUrl = Environment.GetEnvironmentVariable("KeyVault");
+        var keyVaultClient = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
+
+        services.AddSingleton(keyVaultClient);
+
+        Environment.SetEnvironmentVariable(EnviromentalConstant.FILE_STORAGE, keyVaultClient.GetSecret(EnviromentalConstant.FILE_STORAGE).Value.Value);
+        Environment.SetEnvironmentVariable(EnviromentalConstant.CONTAINER_NAME, keyVaultClient.GetSecret(EnviromentalConstant.CONTAINER_NAME).Value.Value);
+        Environment.SetEnvironmentVariable(EnviromentalConstant.PORT, keyVaultClient.GetSecret(EnviromentalConstant.PORT).Value.Value);
+        Environment.SetEnvironmentVariable(EnviromentalConstant.HOST, keyVaultClient.GetSecret(EnviromentalConstant.HOST).Value.Value);
+        Environment.SetEnvironmentVariable(EnviromentalConstant.FROM_EMAIL, keyVaultClient.GetSecret(EnviromentalConstant.FROM_EMAIL).Value.Value);
+        Environment.SetEnvironmentVariable(EnviromentalConstant.PASSWORD, keyVaultClient.GetSecret(EnviromentalConstant.PASSWORD).Value.Value);
+
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
     })
