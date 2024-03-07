@@ -12,6 +12,6 @@ public static class FileNameHelper
         var guid = Guid.NewGuid().ToString();
         var fileNameWithoutExtension = fileName[..^fileExtension.Length];
 
-        return $"{fileNameWithoutExtension}_{guid}{fileExtension}";
+        return $"{guid}{fileExtension}";
     }
 }
