@@ -9,7 +9,7 @@ using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var keyVaultEndpoint = new Uri(builder.Configuration["KeyVault"]);
+var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("KeyVault"));
 
 var client = new SecretClient(keyVaultEndpoint, new DefaultAzureCredential());
 KeyVaultSecret fileStorageConnection = client.GetSecret("FileStorageConnection");
