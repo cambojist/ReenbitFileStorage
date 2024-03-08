@@ -9,7 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A85DE0A5-9F1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{90F28518-B2B0-4F2D-B6F0-EA49B9EAC18D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.BlobFunction", "FileStorage.BlobFunction\FileStorage.BlobFunction.csproj", "{41CF5477-1F39-4895-8172-7098EFB6D041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileStorage.BlobFunction", "FileStorage.BlobFunction\FileStorage.BlobFunction.csproj", "{41CF5477-1F39-4895-8172-7098EFB6D041}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.WebApp.Tests", "FileStorage.WebApp.Tests\FileStorage.WebApp.Tests.csproj", "{7B2FFF43-2C52-4FAD-AD54-7EEBDE0E1484}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{41CF5477-1F39-4895-8172-7098EFB6D041}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41CF5477-1F39-4895-8172-7098EFB6D041}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41CF5477-1F39-4895-8172-7098EFB6D041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B2FFF43-2C52-4FAD-AD54-7EEBDE0E1484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B2FFF43-2C52-4FAD-AD54-7EEBDE0E1484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B2FFF43-2C52-4FAD-AD54-7EEBDE0E1484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B2FFF43-2C52-4FAD-AD54-7EEBDE0E1484}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AA56A635-4747-4F63-9D32-84A244CA35DC} = {A85DE0A5-9F1E-45D4-8166-7DB35CA18EFC}
 		{41CF5477-1F39-4895-8172-7098EFB6D041} = {A85DE0A5-9F1E-45D4-8166-7DB35CA18EFC}
+		{7B2FFF43-2C52-4FAD-AD54-7EEBDE0E1484} = {90F28518-B2B0-4F2D-B6F0-EA49B9EAC18D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E52B0DB2-3DBA-4AB1-80E5-102C58DFD0CB}
