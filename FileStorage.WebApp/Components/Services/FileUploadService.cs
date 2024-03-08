@@ -50,6 +50,7 @@ public class FileUploadService : IFileUploadService
     {
         var result = await _fileUploadValidator.ValidateAsync(request);
 
+        response.Success = true;
         if (!result.IsValid)
         {
             response.Success = false;
@@ -59,7 +60,6 @@ public class FileUploadService : IFileUploadService
             }
         }
 
-        response.Success = true;
         return response;
     }
 }
