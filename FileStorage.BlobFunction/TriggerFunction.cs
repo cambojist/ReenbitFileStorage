@@ -22,11 +22,13 @@ public class TriggerFunction
     public async Task Run([BlobTrigger("reenbittask/{name}", Connection = "AzureWebJobsStorage")] BlobClient blob,
         string name)
     {
+        _logger.LogInformation($"Blob trigger function processed blob\n Name:{name}");
         var response = await blob.GetPropertiesAsync();
         var metadata = response.Value.Metadata;
 
         var sasUri = await _sasTokenService.GetTokenAsync(name);
 
         await _smtpService.SendEmailAsync(metadata["Email"], sasUri);
+        _logger.LogInformation($"Sent email to: {metadata["Email"]}");
     }
 }
