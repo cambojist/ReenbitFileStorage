@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "secrets2": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/FileStorageWebApp20240306182040/providers/Microsoft.ServiceLinker/linkers/KeyVault_3078687CA1",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/MyFileStorageKeyVault",
+      "type": "secrets.keyVault",
+      "connectionId": "KeyVault",
+      "dynamicId": null
+    },
+    "storage1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/FileStorageWebApp20240306182040/providers/Microsoft.ServiceLinker/linkers/FileStorageConnection_069BA52A49, /subscriptions/87fe981a-4b38-4d27-ae4a-e877fd00bce3/resourcegroups/AzureTask/providers/Microsoft.Web/sites/FileStorageWebApp20240306182040/providers/Microsoft.ServiceLinker/linkers/FileStorageConnection_A4510CD7EA",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/azuretask",
+      "type": "storage.azure",
+      "connectionId": "FileStorageConnection",
+      "dynamicId": null
+    }
+  }
+}
