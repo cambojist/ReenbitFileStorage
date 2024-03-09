@@ -21,6 +21,7 @@ var host = new HostBuilder()
         Environment.SetEnvironmentVariable(EnviromentalConstant.HOST, keyVaultClient.GetSecret(EnviromentalConstant.HOST).Value.Value);
         Environment.SetEnvironmentVariable(EnviromentalConstant.FROM_EMAIL, keyVaultClient.GetSecret(EnviromentalConstant.FROM_EMAIL).Value.Value);
         Environment.SetEnvironmentVariable(EnviromentalConstant.PASSWORD, keyVaultClient.GetSecret(EnviromentalConstant.PASSWORD).Value.Value);
+        Environment.SetEnvironmentVariable(EnviromentalConstant.SAS_TOKEN_EXPIRATION_TIME, keyVaultClient.GetSecret(EnviromentalConstant.SAS_TOKEN_EXPIRATION_TIME).Value.Value);
 
         services.AddScoped<ISMTPService, SMTPService>();
         services.AddScoped<ISASTokenService, SASTokenService>();

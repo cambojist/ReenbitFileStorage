@@ -8,4 +8,5 @@ public static class EnviromentalConstant
     public const string HOST = "SMTPHost";
     public const string FROM_EMAIL = "FromEmail";
     public const string PASSWORD = "Password";
+    public const string SAS_TOKEN_EXPIRATION_TIME = "SasTokenExpirationTime";
 }
