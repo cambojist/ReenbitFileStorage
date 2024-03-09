@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{90F28518
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileStorage.BlobFunction", "FileStorage.BlobFunction\FileStorage.BlobFunction.csproj", "{41CF5477-1F39-4895-8172-7098EFB6D041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStorage.WebApp.Tests", "FileStorage.WebApp.Tests\FileStorage.WebApp.Tests.csproj", "{7B2FFF43-2C52-4FAD-AD54-7EEBDE0E1484}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileStorage.WebApp.Tests", "FileStorage.WebApp.Tests\FileStorage.WebApp.Tests.csproj", "{7B2FFF43-2C52-4FAD-AD54-7EEBDE0E1484}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUpload.BlobFunction.Tests", "FileUpload.BlobFunction.Tests\FileUpload.BlobFunction.Tests.csproj", "{9381CE3F-9CAC-4D61-885A-9BDD783902C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileStorage.BlobFunction.Tests", "FileStorage.BlobFunction.Tests\FileStorage.BlobFunction.Tests.csproj", "{9381CE3F-9CAC-4D61-885A-9BDD783902C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
